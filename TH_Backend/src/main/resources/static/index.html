@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Page</title>
+<script>
+	function sendLoginInfo() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "userLogin", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.onload = function() {
+			document.getElementById("loginOut").innerHTML = this.responseText;
+		}
+		xhttp.send("email="+document.getElementById("emailLogin").value + "&password=" + document.getElementById("passLogin").value);
+	}
+	function sendRegisterInfo() {
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "userRegister", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.onload = function() {
+			document.getElementById("registerOut").innerHTML = this.responseText;
+		}
+		xhttp.send("email="+document.getElementById("emailRegister").value + "&password=" + document.getElementById("passRegister").value);
+	}
+</script>
+<style>
+	form input[type="text"] {
+		width: 300px;
+		height: 20px;
+		border-radius: 5px;
+	}
+	form input[type="password"] {
+		width: 300px;
+		height: 20px;
+		border-radius: 5px;
+	}
+	form input[type="button"] {
+    	background-color: #800000; 
+    	color: white; 
+    	width: 310px;
+		height: 30px;
+		border-radius: 5px;
+    	border: none; 
+    	cursor: pointer; 
+	}
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    .top-bar {
+        background-color: #9999ff;
+        color: white;
+        padding: 10px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .top-bar .left {
+        font-weight: bold;
+    }
+    .top-bar .right {
+        display: flex;
+        align-items: center;
+    }
+    .top-bar .right a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+    }
+    .forms {
+        display: flex;
+        justify-content: center;
+    }
+    .forms form {
+        flex: 1;
+        margin: 0 10px;
+        max-width: 300px;
+    }
+    .outs {
+        display: flex;
+        justify-content: center;
+    }
+    .outs h4 {
+        flex: 1;
+        margin: 0 10px;
+    }
+</style>
+</head>
+<body>
+	<div class="top-bar">
+    	<div class="left">JoeStocks</div>
+    	<div class="right">
+        	<a href="">Home/Search</a>
+        	<a href="">Login/Sign Up</a>
+    	</div>
+	</div>
+	<br />
+	<div class="forms">
+	<form name="login">
+		<p>Login</p>
+		<label for="emailLogin">Email:</label>
+		<br/>
+		<input type="text" id="emailLogin" name="emailLogin" required /><br/>
+		<br/>
+		<label for="passLogin">Password:</label>
+		<br/>
+		<input type="password" id="passLogin" name="passLogin" required><br/>
+		<br/>
+		<input type="button" value="Submit" onclick="sendLoginInfo()"/>
+	</form>
+	<form name="register">
+		<p>Sign Up</p>
+		<label for="emailRegister">Email:</label>
+		<br/>
+		<input type="text" id="emailRegister" name="emailRegister" required /><br/>
+		<br/>
+		<label for="passRegister">Password:</label>
+		<br/>
+		<input type="password" id="passRegister" name="passRegister" required><br/>
+		<br/>
+		<input type="button" value="Submit" onclick="sendRegisterInfo()"/>
+	</form>
+	</div>
+	<br />
+	<div class = "outs">
+ 	<h4 id="loginOut"></h4>
+ 	<h4 id="registerOut"></h4>
+ 	</div>
+ 	<br />
+
+</body>
+</html>

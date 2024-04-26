@@ -18,4 +18,5 @@ public class ImageController {
 	public String getImage(@RequestParam("property_id") int pid) {
 		return imageRepository.getImage(pid);
 	}
+	
 }

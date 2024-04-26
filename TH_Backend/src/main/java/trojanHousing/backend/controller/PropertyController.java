@@ -26,14 +26,17 @@ public class PropertyController {
 		return propertyRepository.getSavedProperties(uid);
 	}
 	
+	
 	/* addSavedListing(int uid, int pid): This will take a User ID and Property ID as its parameters and call 
 	 * addSavedListing() in the JDBC Connector class, returning -1 if it was unsuccessful or 0 if it was.
 	 */
-	
+	/*
 	@RequestMapping(value = "/addSavedProperty", method = RequestMethod.GET)
 	public int addSavedListing(@RequestParam("user_id") int uid, @RequestParam("property_id") int pid) {
 		return propertyRepository.addSavedProperty(uid, pid);
 	}
+	*/
+	
 	
 	
 }
