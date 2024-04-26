@@ -1,48 +1,56 @@
 package trojanHousing.backend.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "UserTable")
 public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int UserId;
+	
+	private String EmailAddress;
+	private String Password;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+	public User() {
+		super();
+	}
 
-    @Column(length = 30, nullable = false)
-    private String emailAddress;
+	public User(int UserId, String EmailAddress, String Password) {
+		super();
+		this.UserId = UserId;
+		this.EmailAddress = EmailAddress;
+		this.Password = Password;
+	}
 
-    @Column(length = 30, nullable = false)
-    private String password;
+	public int getUserId() {
+		return UserId;
+	}
 
-    // Getters and setters
-    public int getUserId() {
-        return userId;
-    }
+	public void setUserId(int userId) {
+		UserId = userId;
+	}
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+	public String getEmailAddress() {
+		return EmailAddress;
+	}
 
-    public String getEmailAddress() {
-        return emailAddress;
-    }
+	public void setEmailAddress(String emailAddress) {
+		EmailAddress = emailAddress;
+	}
 
-    public void setEmailAddress(String emailAddress) {
-        this.emailAddress = emailAddress;
-    }
+	public String getPassword() {
+		return Password;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setPassword(String password) {
+		Password = password;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	
+
 }

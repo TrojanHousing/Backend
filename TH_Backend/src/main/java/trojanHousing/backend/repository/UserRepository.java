@@ -3,15 +3,16 @@ import java.util.List;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-
+import jakarta.transaction.Transactional;
 import trojanHousing.backend.entity.User;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class UserRepository {
 
-	@PersistenceContext
+	@Autowired
 	EntityManager em;
 
 	public User getUserByEmail(String email) {
@@ -25,7 +26,7 @@ public class UserRepository {
 			return user.get(0);
 		}
 	}
-
+	@Transactional
 	public int addUser(User user) {
 		em.persist(user);
 		em.flush();

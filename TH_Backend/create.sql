@@ -22,20 +22,22 @@ CREATE TABLE RentalListings(
 	PRIMARY KEY(PropertyID)
 );
 CREATE TABLE SavedListings(
-	UserID int,
+	SavedListingId int NOT NULL AUTO_INCREMENT,
+	UserId int,
 	PropertyID int,
-	FOREIGN KEY(UserID) REFERENCES UserTable(UserID),
+	PRIMARY KEY(SavedListingId),
+	FOREIGN KEY(UserId) REFERENCES UserTable(UserId),
 	FOREIGN KEY(PropertyID) REFERENCES RentalListings(PropertyID)
 );
 CREATE TABLE Comments(
 	CommentID int NOT NULL AUTO_INCREMENT,
     PropertyID int, 
-    UserID int, 
+    UserId int, 
     Text varchar(255) NOT NULL,
     Rating double NOT NULL,
     PRIMARY KEY(CommentID),
     FOREIGN KEY(PropertyID) REFERENCES RentalListings(PropertyID),
-    FOREIGN KEY(UserId) REFERENCES UserTable(UserID)
+    FOREIGN KEY(UserId) REFERENCES UserTable(UserId)
 );
 CREATE TABLE Images(
 	ImageID int NOT NULL AUTO_INCREMENT,

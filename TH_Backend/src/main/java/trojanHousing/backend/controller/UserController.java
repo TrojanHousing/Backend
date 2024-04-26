@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import trojanHousing.backend.entity.User;
 import trojanHousing.backend.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ public class UserController {
 	UserRepository userRepo;
 	
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+	@ResponseBody
 	public String login(@RequestParam("email") String email,
 			@RequestParam("password") String password, HttpServletResponse response, HttpSession session)
 			throws IOException {
@@ -26,7 +29,7 @@ public class UserController {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				return ("Login unsuccessful, please enter a valid email.");
 			} else {
-				if (user.getPassword() == password) {
+				if (user.getPassword().equals(password)) {
 					session.setAttribute("userId", user.getUserId());
 					response.setStatus(HttpServletResponse.SC_OK);
 					return ("Login Successful!");
@@ -43,6 +46,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value = "/userRegister", method = RequestMethod.POST)
+	@ResponseBody
 	public String register(@RequestParam("email") String email, 
 			@RequestParam("password") String password, HttpServletResponse response, HttpSession session) 
 			throws IOException {

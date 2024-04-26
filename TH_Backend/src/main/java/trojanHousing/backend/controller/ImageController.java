@@ -10,7 +10,7 @@ import java.util.List;
 @Controller
 public class ImageController {
 	/*getImage(PropertyID) this gets called from our Listing class and returns an image URL.*/
-	
+	/*
 	@Autowired
 	ImageRepository imageRepository;
 	
@@ -18,5 +18,5 @@ public class ImageController {
 	public String getImage(@RequestParam("property_id") int pid) {
 		return imageRepository.getImage(pid);
 	}
-	
+	*/
 }

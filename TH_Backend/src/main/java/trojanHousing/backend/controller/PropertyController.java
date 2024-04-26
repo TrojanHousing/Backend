@@ -17,7 +17,7 @@ public class PropertyController {
 	/* getSavedListings(int uid): This will take an integer representing the User ID and call 
 	 * getSavedListings(uid) in the ListingReposity class, returning a list of Listing objects which have been saved by the user.
 	 */
-	
+	/*
 	@Autowired
 	PropertyRepository propertyRepository;
 	
@@ -25,7 +25,7 @@ public class PropertyController {
 	public List<Property> getSavedProperties(@RequestParam("user_id") int uid) {
 		return propertyRepository.getSavedProperties(uid);
 	}
-	
+	*/
 	
 	/* addSavedListing(int uid, int pid): This will take a User ID and Property ID as its parameters and call 
 	 * addSavedListing() in the JDBC Connector class, returning -1 if it was unsuccessful or 0 if it was.
