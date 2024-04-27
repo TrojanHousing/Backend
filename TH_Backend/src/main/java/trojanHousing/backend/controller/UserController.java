@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ public class UserController {
 	@Autowired
 	UserRepository userRepo;
 	
+	@CrossOrigin
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	@ResponseBody
 	public String login(@RequestParam("email") String email,
@@ -44,7 +46,7 @@ public class UserController {
 			return ("Error :(");
 		}
 	}
-	
+	@CrossOrigin
 	@RequestMapping(value = "/userRegister", method = RequestMethod.POST)
 	@ResponseBody
 	public String register(@RequestParam("email") String email, 
