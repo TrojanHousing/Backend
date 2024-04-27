@@ -5,9 +5,9 @@ package trojanHousing.backend.repository;
 //@NoArgsConstructor
 public class SearchCriteria {
 
-    String filterKey;
-    Object value;
-    String dataOption;
+    public String filterKey;
+    public Object value;
+    public String dataOption;
 
     public SearchCriteria(String filterKey, Object value) {
         super();

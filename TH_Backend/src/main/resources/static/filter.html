@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Search Test</title>
+    <script>
+        function sendSearchRequest() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "/filterProperties", true); // Ensure the URL is correct and accessible
+            xhttp.setRequestHeader("Content-Type", "application/json"); // Correct content type for JSON
+            xhttp.onload = function() {
+                if (xhttp.status === 200) { // Check if the request was successful
+                    document.getElementById("results").innerHTML = this.responseText;
+                } else {
+                    document.getElementById("results").innerHTML = "Error: " + xhttp.status;
+                }
+            };
+            xhttp.onerror = function () {
+                // Handle network errors
+                document.getElementById("results").innerHTML = "Network Error";
+            };
+
+            // Example hard-coded search criteria
+            const searchCriteria = JSON.stringify([
+                { key: "address", operation: "like", value: "Main Street" },
+                { key: "price", operation: "gt", value: 100000 }
+            ]);
+            xhttp.send(searchCriteria);
+        }
+    </script>
+</head>
+<body>
+    <h1>Test Property Search</h1>
+    <button onclick="sendSearchRequest()">Search Properties</button>
+    <div id="results"></div>
+</body>
+</html>
