@@ -15,6 +15,11 @@ public class UserRepository {
 	@Autowired
 	EntityManager em;
 
+	public User findUserById(int userId) 
+	{
+		return em.find(User.class, userId);
+	}
+	
 	public User getUserByEmail(String email) {
 		@SuppressWarnings("unchecked")
 		List<User> user = em.createQuery("SELECT c FROM User c WHERE c.EmailAddress=:email")

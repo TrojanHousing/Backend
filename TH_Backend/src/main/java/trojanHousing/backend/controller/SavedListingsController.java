@@ -1,20 +1,23 @@
 package trojanHousing.backend.controller;
 
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Controller; 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import trojanHousing.backend.entity.Property;
 import trojanHousing.backend.entity.SavedListings;
 import trojanHousing.backend.entity.User;
+import trojanHousing.backend.repository.PropertyRepository;
 import trojanHousing.backend.repository.SavedListingsRepository;
 import trojanHousing.backend.repository.UserRepository;
+import java.util.List; 
 
 @Controller
 public class SavedListingsController {
