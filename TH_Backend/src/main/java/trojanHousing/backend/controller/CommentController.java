@@ -1,5 +1,7 @@
 package trojanHousing.backend.controller;
 import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import trojanHousing.backend.entity.Comment;
+import trojanHousing.backend.entity.Image;
 import trojanHousing.backend.repository.CommentRepository;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -27,11 +31,33 @@ public class CommentController {
 	public String getCommentsByPropertyID(@RequestParam("propertyID") int propertyID,
 		HttpServletResponse response)
 		throws IOException {
+		System.out.println("in function. pid=" + propertyID);
 		try {
 			List<Comment> comments = commentRepo.getByProperty(propertyID);
-			Gson gson = new Gson();
+			System.out.println("gotten from repo. " + comments);
+			List<String> commentText = new ArrayList<>();
+			List<Integer> commentRatings = new ArrayList<>();
+			for (Comment comment: comments) {
+				commentText.add(comment.getText());
+				commentRatings.add(comment.getRating());
+			}
+			// manually make json string
+			// {"name":"John","age":30,"email":"john@example.com"}
+			String commentsJson = "[";
+			for (int i = 0; i < comments.size(); i++) {
+				commentsJson += "{\"text\":\"" + commentText.get(i) + "\",\"rating\":" + commentRatings.get(i) + "}";
+				if ((i + 1) != comments.size()) { // not last thing
+					commentsJson += ",";
+				}
+				else {
+					commentsJson += "]";
+				}
+			}
+//			Gson gson = new Gson();
 			response.setStatus(HttpServletResponse.SC_OK);
-			return gson.toJson(comments);
+			return commentsJson;
+//			Type listType = new TypeToken<List<Comment>>() {}.getType();
+//			return gson.toJson(comments,listType);
 		} catch (Exception e) {
 			System.out.println("Error occured at CommentsController : " + e.getMessage());
 			response.setStatus(404);

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Image Comment Tester</title>
+<script>
+	function sendImage() {
+		console.log("in sendImage");
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "getImage", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.onreadystatechange = function() {
+			console.log(this.responseText);
+			document.getElementById("response").innerHTML = this.responseText;
+		}
+		xhttp.send("property_id=2");
+		return false;
+	}
+	function getCommentByPID() {
+		console.log("in getCommentByPID: pid=" + document.forms["comment-pid-form"].pid.value);
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "getCommentsByPropertyID", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.onreadystatechange = function() {
+			console.log(this.responseText);
+			var comments = JSON.parse(this.responseText);
+			for (let i = 0; i < comments.length; i++) {
+				console.log("text: " + comments[i].text);
+				console.log("rating: " + comments[i].rating);
+			}
+			document.getElementById("comment-pid-response").innerHTML = this.responseText;
+		}
+		xhttp.send("propertyID=" + document.forms["comment-pid-form"].pid.value);
+		return false;
+	}
+</script>
+</head>
+<body>
+	<p id="response">Response:</p>
+	<form name="form" onSubmit="return sendImage();">
+		<input type="submit" value="submit">
+	</form>
+	<p>"get comment by PID: " <span id="comment-pid-response"></span></p>
+	<form name="comment-pid-form" onSubmit="return getCommentByPID();">
+		<input type="text" name="pid" id="pid">
+		<input type="submit" value="submit">
+	</form>
+</body>
+</html>

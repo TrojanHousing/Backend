@@ -6,17 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.google.gson.Gson;
-
 import trojanHousing.backend.entity.Image;
-import trojanHousing.backend.entity.User;
 import trojanHousing.backend.repository.ImageRepository;
-import trojanHousing.backend.repository.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
