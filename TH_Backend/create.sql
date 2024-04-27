@@ -34,7 +34,7 @@ CREATE TABLE Comments(
     PropertyID int, 
     UserId int, 
     Text varchar(255) NOT NULL,
-    Rating double NOT NULL,
+    Rating int NOT NULL,
     PRIMARY KEY(CommentID),
     FOREIGN KEY(PropertyID) REFERENCES RentalListings(PropertyID),
     FOREIGN KEY(UserId) REFERENCES UserTable(UserId)

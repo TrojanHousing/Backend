@@ -26,10 +26,20 @@ public class Comment {
     @JoinColumn(name = "UserID")  // Assuming the foreign key should not be nullable as typical for IDs
     private User user;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 255, nullable = false)
     private String text;
+    
+    @Column(name = "Rating", nullable = false)
+    private int rating;
+    public int getRating() {
+		return rating;
+	}
 
-    // Getters and setters
+	public void setRating(int rating) {
+		this.rating = rating;
+	}
+
+	// Getters and setters
     public int getCommentID() {
         return commentID;
     }
