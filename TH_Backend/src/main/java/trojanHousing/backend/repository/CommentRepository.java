@@ -18,14 +18,14 @@ public class CommentRepository {
 	public List<Comment> getByProperty(int propertyID) {
 		@SuppressWarnings("unchecked")
 		List<Comment> comments = em.createQuery("SELECT c FROM Comment c WHERE c.property=:prop")
-					.setParameter("prop", propertyID)
+					.setParameter("prop", em.getReference(Property.class, propertyID))
 					.getResultList();
 		return comments;
 	}
 	public List<Comment> getByUser(int userID) {
 		@SuppressWarnings("unchecked")
 		List<Comment> comments = em.createQuery("SELECT c FROM Comment c WHERE c.user=:userID")
-					.setParameter("userID", userID)
+					.setParameter("userID", em.getReference(User.class, userID))
 					.getResultList();
 		return comments;
 	}
