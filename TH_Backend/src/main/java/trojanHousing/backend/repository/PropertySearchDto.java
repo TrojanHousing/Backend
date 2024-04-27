@@ -7,7 +7,7 @@ import java.util.List;
 //@AllArgsConstructor
 public class PropertySearchDto {
 
-  private List<SearchCriteria> searchCriteriaList;
-  private String dataOption;
+  public List<SearchCriteria> searchCriteriaList;
+  public String dataOption;
 
 }
