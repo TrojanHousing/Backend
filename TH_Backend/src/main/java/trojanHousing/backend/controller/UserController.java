@@ -32,7 +32,7 @@ public class UserController {
 				if (user.getPassword().equals(password)) {
 					session.setAttribute("userId", user.getUserId());
 					response.setStatus(HttpServletResponse.SC_OK);
-					return ("Login Successful!");
+					return ("Login Successful! You are user " + user.getUserId());
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 					return ("Login unsuccessful, please enter the correct password.");
@@ -58,7 +58,7 @@ public class UserController {
 				int userID = userRepo.addUser(user);
 				session.setAttribute("userId", userID);
 				response.setStatus(HttpServletResponse.SC_OK);
-				return ("Registration Successful!");
+				return ("Registration Successful!You are user " + user.getUserId());
 			} else {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 				return ("Email is already registered");
