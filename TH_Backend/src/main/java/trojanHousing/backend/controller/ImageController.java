@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+
 import trojanHousing.backend.entity.Image;
 import trojanHousing.backend.entity.User;
 import trojanHousing.backend.repository.ImageRepository;
@@ -38,8 +40,5 @@ public class ImageController {
         String jsonString = gson.toJson(urls);
         return jsonString;
 	}
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> b45b8bd04792551602d76965e793d60aac204040
+
