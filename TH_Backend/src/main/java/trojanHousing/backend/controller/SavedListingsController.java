@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.google.gson.Gson;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,8 @@ public class SavedListingsController {
 	
 	@Autowired
 	PropertyRepository propertyRepository;
+	@PersistenceContext
+	EntityManager em;
 	
 	
 	//Have this as returning a string for now
@@ -39,7 +44,7 @@ public class SavedListingsController {
 	{
 		
 		 User user = userRepository.findUserById(userID);
-	     Property property = propertyRepository.findPropertyById(propertyID);
+	     Property property = em.getReference(Property.class, propertyID);
 
 	     if (user != null && property != null) {
 	          SavedListings newSavedListing = new SavedListings(user, property);

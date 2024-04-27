@@ -25,7 +25,7 @@ public class SavedListingsRepository {
 		
 	}
 	
-	public List<Property> getSavedListings(String userId) 
+	public List<Property> getSavedListings(int userId) 
 	{
 		
 		List<Property> savedProperties = em.createQuery("SELECT s.property FROM SavedListings s WHERE s.user.userId = :userId", Property.class)
