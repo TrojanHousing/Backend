@@ -13,7 +13,7 @@
 			console.log(this.responseText);
 			document.getElementById("response").innerHTML = this.responseText;
 		}
-		xhttp.send("property_id=2");
+		xhttp.send("property_id=" + document.forms["form"].image-pid-value);
 		return false;
 	}
 	function getCommentByPID() {
@@ -33,16 +33,64 @@
 		xhttp.send("propertyID=" + document.forms["comment-pid-form"].pid.value);
 		return false;
 	}
+	function getCommentByUID() {
+		console.log("in getCommentByUID: uid=" + document.forms["comment-uid-form"].uid.value);
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "getCommentsByUser", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.onreadystatechange = function() {
+			console.log(this.responseText);
+			var comments = JSON.parse(this.responseText);
+			for (let i = 0; i < comments.length; i++) {
+				console.log("text: " + comments[i].text);
+				console.log("rating: " + comments[i].rating);
+			}
+			document.getElementById("comment-uid-response").innerHTML = this.responseText;
+		}
+		xhttp.send("userID=" + document.forms["comment-uid-form"].uid.value);
+		return false;
+	}
+	function addComment() {
+		console.log("in addComment");
+		var xhttp = new XMLHttpRequest();
+		xhttp.open("POST", "addComment", true);
+		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		xhttp.onreadystatechange = function() {
+			if (this.status == 200) {
+				document.getElementById("add-comment-response").innerHTML = "successfully added";
+			}
+			else {
+				document.getElementById("add-comment-response").innerHTML = "error: unsuccessfully added";
+			}
+		}
+		xhttp.send("propertyID=" + document.forms["add-comment"]["comment-pid"].value
+				+ "&userID=1&text=" + document.forms["add-comment"]["comment-text"].value
+				+ "&rating=" + document.forms["add-comment"]["comment-rating"].value);
+		return false;
+	}
 </script>
 </head>
 <body>
-	<p id="response">Response:</p>
+	<p> get Image by pid: <span id="response"></span></p>
 	<form name="form" onSubmit="return sendImage();">
+		<input type="text" id="image-pid" name="image-pid">
 		<input type="submit" value="submit">
 	</form>
-	<p>"get comment by PID: " <span id="comment-pid-response"></span></p>
+	<p>get comment by PID: <span id="comment-pid-response"></span></p>
 	<form name="comment-pid-form" onSubmit="return getCommentByPID();">
-		<input type="text" name="pid" id="pid">
+		Enter pid:<input type="text" name="pid" id="pid">
+		<input type="submit" value="submit">
+	</form>
+	<p>get comment by user: <span id="comment-uid-response"></span></p>
+	<form name="comment-uid-form" onSubmit="return getCommentByUID();">
+		Enter user:<input type="text" name="uid" id="uid">
+		<input type="submit" value="submit">
+	</form>
+	<p>Add Comment (default userID = 1): <span id="add-comment-response"></span></p>
+	<form name="add-comment" onSubmit="return addComment();">
+		Enter pid: <input type="text" id="comment-pid" name ="comment-pid">
+		Enter comment text: <input type="text" id="comment-text" name="comment-text">
+		Enter comment rating: <input type="text" id="comment-rating" name="comment-rating">
 		<input type="submit" value="submit">
 	</form>
 </body>
