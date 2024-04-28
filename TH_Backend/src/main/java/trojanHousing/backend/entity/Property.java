@@ -21,7 +21,7 @@ public class Property {
     @Column(nullable = false)
     private double averageRating;
 
-    @Column(length = 255, nullable = false)
+    @Column(length = 3200, nullable = false)
     private String description;
 
     @Column(nullable = false)
