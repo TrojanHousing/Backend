@@ -33,6 +33,9 @@ public class CommentController {
 		throws IOException {
 		try {
 			List<Comment> comments = commentRepo.getByProperty(propertyID);
+			if (comments.size() == 0) {
+				return "[]";
+			}
 			List<String> commentText = new ArrayList<>();
 			List<Integer> commentRatings = new ArrayList<>();
 			for (Comment comment: comments) {
@@ -74,6 +77,9 @@ public class CommentController {
 		throws IOException {
 		try {
 			List<Comment> comments = commentRepo.getByUser(userID);
+			if (comments.size() == 0) {
+				return "[]";
+			}
 			List<String> commentText = new ArrayList<>();
 			List<Integer> commentRatings = new ArrayList<>();
 			for (Comment comment: comments) {

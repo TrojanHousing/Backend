@@ -6,6 +6,7 @@
 <script>
 	function sendImage() {
 		console.log("in sendImage");
+		console.log("property_id=");
 		var xhttp = new XMLHttpRequest();
 		xhttp.open("POST", "getImage", true);
 		xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -13,7 +14,7 @@
 			console.log(this.responseText);
 			document.getElementById("response").innerHTML = this.responseText;
 		}
-		xhttp.send("property_id=" + document.forms["form"].image-pid-value);
+		xhttp.send("property_id=" + document.forms["form"]["image-pid"].value);
 		return false;
 	}
 	function getCommentByPID() {
