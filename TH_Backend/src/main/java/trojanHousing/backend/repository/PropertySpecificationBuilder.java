@@ -15,7 +15,8 @@ public class PropertySpecificationBuilder {
         this.params = new ArrayList<>();
     }
 
-    public final PropertySpecificationBuilder with(String key, String operation, Object value) {
+    public final PropertySpecificationBuilder with(String key, Object value) {
+    	System.out.println("Building with: " + key + " " + value); 
         params.add(new SearchCriteria(key, value));
         return this;
     }
@@ -33,12 +34,13 @@ public class PropertySpecificationBuilder {
         Specification<Property> result = new PropertySpecification(params.get(0));
         for (int idx = 1; idx < params.size(); idx++){
             SearchCriteria criteria = params.get(idx);
-            result =  SearchOperation.getDataOption(criteria
-                     .dataOption) == SearchOperation.ALL
-                     ? Specification.where(result).and(new    
-                       PropertySpecification(criteria))
-                     : Specification.where(result).or(
-                       new PropertySpecification(criteria));
+//            result =  SearchOperation.getDataOption(criteria
+//                     .dataOption) == SearchOperation.ALL
+//                     ? Specification.where(result).and(new    
+//                       PropertySpecification(criteria))
+//                     : Specification.where(result).or(
+//                       new PropertySpecification(criteria));
+            result = Specification.where(result).and(new PropertySpecification(criteria));
         }
         return result;
     }

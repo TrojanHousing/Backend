@@ -30,7 +30,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+//@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true") // Specify the exact origins
+@RestController
+@RequestMapping("/properties")
 public class PropertyController {
 
     @Autowired
@@ -42,7 +44,6 @@ public class PropertyController {
 //        List<Property> properties = propertyRepository.findAll();
 //        return ResponseEntity.ok(properties);
 //    }
-    @CrossOrigin(origins = "*") 
     @RequestMapping(value = "/filterProperties", method = RequestMethod.POST)
 	@ResponseBody
     public List<Property> searchProperties(@RequestBody String searchParams) {
@@ -50,15 +51,16 @@ public class PropertyController {
         PropertySpecificationBuilder builder = new PropertySpecificationBuilder();
         Gson gson = new Gson();        
         Type listType = new TypeToken<List<SearchCriteria>>(){}.getType();
-        List<SearchCriteria> criteriaList = gson.fromJson(searchParams, listType);
+        List<SearchCriteria> criteriaList = gson.fromJson(searchParams, listType);        
         
         for (SearchCriteria criteria : criteriaList) {
-            builder.with(criteria.filterKey, (String) criteria.value, criteria.dataOption);
+        	System.out.println(criteria.filterKey); 
+        	builder.with(criteria.filterKey, criteria.value);
         }
         
         List<Property> filteredProperties = propertyRepository.findAll(builder.build()); 
         
-        return filteredProperties; 
+       return filteredProperties; 
     }
 
 }

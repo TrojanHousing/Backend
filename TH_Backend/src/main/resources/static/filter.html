@@ -7,7 +7,7 @@
     <script>
         function sendSearchRequest() {
             var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "/filterProperties", true); // Ensure the URL is correct and accessible
+            xhttp.open("POST", "properties/filterProperties", true); // Ensure the URL is correct and accessible
             xhttp.setRequestHeader("Content-Type", "application/json"); // Correct content type for JSON
             xhttp.onload = function() {
                 if (xhttp.status === 200) { // Check if the request was successful
@@ -23,8 +23,8 @@
 
             // Example hard-coded search criteria
             const searchCriteria = JSON.stringify([
-                { key: "address", operation: "like", value: "Main Street" },
-                { key: "price", operation: "gt", value: 100000 }
+                { filterKey: "price", operation: "like", value: "2000" },
+                { filterKey: "baths", operation: "gt", value: "2" }
             ]);
             xhttp.send(searchCriteria);
         }
