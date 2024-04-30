@@ -32,7 +32,16 @@ public class CommentRepository {
 	@Transactional
 	public void addComment(int propertyID, int userID, String text, int rating) {
 		User user = em.getReference(User.class, userID);
-		Property property = em.getReference(Property.class, propertyID);
+		Property property = em.find(Property.class, propertyID);
+		List<Comment> comments = getByProperty(propertyID);
+		int numRatings = comments.size();
+		if (numRatings == 0) {
+			property.setAverageRating(rating);
+		} else {
+			double newAvg = (((property.getAverageRating() * numRatings) + rating)/(numRatings+1));
+			property.setAverageRating(newAvg);
+		}
+		em.persist(property);
 		Comment comment = new Comment();
 		comment.setProperty(property);
 		comment.setUser(user);

@@ -22,34 +22,34 @@ public class UserController {
 	@CrossOrigin
 	@RequestMapping(value = "/userLogin", method = RequestMethod.POST)
 	@ResponseBody
-	public String login(@RequestParam("email") String email,
+	public int login(@RequestParam("email") String email,
 			@RequestParam("password") String password, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		try {
 			User user = userRepo.getUserByEmail(email);
 			if (user == null) {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				return ("Login unsuccessful, please enter a valid email.");
+				return user.getUserId();
 			} else {
 				if (user.getPassword().equals(password)) {
 					session.setAttribute("userId", user.getUserId());
 					response.setStatus(HttpServletResponse.SC_OK);
-					return ("Login Successful! You are user " + user.getUserId());
+					return (user.getUserId());
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					return ("Login unsuccessful, please enter the correct password.");
+					return (-1);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Error occured at UsersController : " + e.getMessage());
 			response.setStatus(404);
-			return ("Error :(");
+			return (-2);
 		}
 	}
 	@CrossOrigin
 	@RequestMapping(value = "/userRegister", method = RequestMethod.POST)
 	@ResponseBody
-	public String register(@RequestParam("email") String email, 
+	public int register(@RequestParam("email") String email, 
 			@RequestParam("password") String password, HttpServletResponse response, HttpSession session) 
 			throws IOException {
 		try {
@@ -60,15 +60,15 @@ public class UserController {
 				int userID = userRepo.addUser(user);
 				session.setAttribute("userId", userID);
 				response.setStatus(HttpServletResponse.SC_OK);
-				return ("Registration Successful!You are user " + user.getUserId());
+				return (user.getUserId());
 			} else {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				return ("Email is already registered");
+				return (-1);
 			}
 		} catch (Exception e) {
 			System.out.println("Error occured at UserController : " + e.getMessage());
 			response.setStatus(404);
-			return ("Error :(");
+			return (-2);
 		}
 	}
 }
