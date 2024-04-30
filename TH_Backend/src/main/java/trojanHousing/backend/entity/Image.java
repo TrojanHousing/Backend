@@ -19,10 +19,10 @@ public class Image {
     private int imageID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PropertyID")  // Assuming the foreign key should be nullable as it's not specified as NOT NULL
+    @JoinColumn(name = "propertyID")  // Assuming the foreign key should be nullable as it's not specified as NOT NULL
     private Property property;
 
-    @Column(length = 40, nullable = false)
+    @Column(length = 255, nullable = false)
     private String imageURL;
 
     // Getters and setters

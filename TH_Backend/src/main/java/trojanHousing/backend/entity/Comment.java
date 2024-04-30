@@ -19,17 +19,17 @@ public class Comment {
     private int commentID;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PropertyID")  // Assuming the foreign key should not be nullable as typical for IDs
+    @JoinColumn(name = "propertyID")  // Assuming the foreign key should not be nullable as typical for IDs
     private Property property;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "UserID")  // Assuming the foreign key should not be nullable as typical for IDs
+    @JoinColumn(name = "UserId")  // Assuming the foreign key should not be nullable as typical for IDs
     private User user;
 
     @Column(length = 255, nullable = false)
     private String text;
     
-    @Column(name = "Rating", nullable = false)
+    @Column(name = "rating", nullable = false)
     private int rating;
     public int getRating() {
 		return rating;

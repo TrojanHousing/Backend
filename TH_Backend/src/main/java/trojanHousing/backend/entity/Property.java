@@ -8,15 +8,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "RentalListings")
+@Table(name = "rental_listings")
 public class Property {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int propertyID;
 
     @Column(length = 255, nullable = false)
-    private String url;
+    private String topPicture;
 
     @Column(nullable = false)
     private double averageRating;
@@ -48,12 +47,12 @@ public class Property {
         this.propertyID = propertyID;
     }
 
-    public String getUrl() {
-        return url;
+    public String getTopPicture() {
+        return topPicture;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setTopPicture(String topPicture) {
+        this.topPicture = topPicture;
     }
 
     public double getAverageRating() {
