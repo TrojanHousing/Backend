@@ -46,7 +46,7 @@ public class PropertyLoader {
 	        for (ListingReader lr : listingReaders) {
 	            Property property = new Property();
 	            property.setAddress(lr.getStreetAddress());
-	            property.setAverageRating(0);
+	            property.setAverageRating(2.5);
 	            property.setBaths((int)lr.getBathrooms());
 	            property.setBeds(lr.getBedrooms());
 	            property.setDescription(lr.getDescription());
