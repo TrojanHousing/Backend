@@ -23,6 +23,9 @@ public class ImageController {
 	@ResponseBody
 	public String getImages(@RequestParam("property_id") int pid) {
 		List<Image> images = imageRepo.getImages(pid);
+		if (images.size() == 0) {
+			return "";
+		}
 		List<String> urls = new ArrayList<>();
 		for (Image image: images) {
 			urls.add(image.getImageURL());
