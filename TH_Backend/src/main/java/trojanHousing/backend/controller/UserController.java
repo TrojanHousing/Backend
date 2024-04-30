@@ -29,7 +29,7 @@ public class UserController {
 			User user = userRepo.getUserByEmail(email);
 			if (user == null) {
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-				return user.getUserId();
+				return -1;
 			} else {
 				if (user.getPassword().equals(password)) {
 					session.setAttribute("userId", user.getUserId());
@@ -37,13 +37,13 @@ public class UserController {
 					return (user.getUserId());
 				} else {
 					response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-					return (-1);
+					return (-2);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("Error occured at UsersController : " + e.getMessage());
 			response.setStatus(404);
-			return (-2);
+			return (0);
 		}
 	}
 	@CrossOrigin
@@ -68,7 +68,7 @@ public class UserController {
 		} catch (Exception e) {
 			System.out.println("Error occured at UserController : " + e.getMessage());
 			response.setStatus(404);
-			return (-2);
+			return (0);
 		}
 	}
 }
