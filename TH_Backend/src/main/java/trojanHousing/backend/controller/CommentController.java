@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,7 @@ public class CommentController {
 	@Autowired
 	CommentRepository commentRepo;
 	
+	@CrossOrigin
 	@RequestMapping(value = "/getCommentsByPropertyID", method = RequestMethod.POST)
 	@ResponseBody
 	public String getCommentsByPropertyID(@RequestParam("propertyID") int propertyID,
@@ -70,6 +72,8 @@ public class CommentController {
 			return ("Error :(");
 		}
 	}
+	
+	@CrossOrigin
 	@RequestMapping(value = "/getCommentsByUser", method = RequestMethod.POST)
 	@ResponseBody
 	public String getCommentsByUser(@RequestParam("userID") int userID,

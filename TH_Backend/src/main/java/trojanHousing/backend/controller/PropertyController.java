@@ -44,6 +44,7 @@ public class PropertyController {
 //        List<Property> properties = propertyRepository.findAll();
 //        return ResponseEntity.ok(properties);
 //    }
+    @CrossOrigin
     @RequestMapping(value = "/filterProperties", method = RequestMethod.POST)
 	@ResponseBody
     public List<Property> searchProperties(@RequestBody String searchParams) {

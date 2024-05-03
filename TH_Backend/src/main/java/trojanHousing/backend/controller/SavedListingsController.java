@@ -1,6 +1,7 @@
 package trojanHousing.backend.controller;
 
-import org.springframework.stereotype.Controller; 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,6 +41,7 @@ public class SavedListingsController {
 	
 	
 	//Have this as returning a string for now
+	@CrossOrigin
 	@RequestMapping(value = "/addListing", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<?> addToSaveListing(@RequestParam("userID") int userID, 
@@ -57,6 +59,7 @@ public class SavedListingsController {
 	     }
 	}
 	
+	@CrossOrigin
 	@RequestMapping(value = "/getSavedListings")
 	@ResponseBody
 	public ResponseEntity<?> getSavedListings(@RequestParam("userID") int userID) {
