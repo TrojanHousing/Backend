@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
+import trojanHousing.backend.entity.Property;
 import trojanHousing.backend.entity.Comment;
 import trojanHousing.backend.entity.Image;
 import trojanHousing.backend.repository.CommentRepository;
@@ -40,9 +40,11 @@ public class CommentController {
 			}
 			List<String> commentText = new ArrayList<>();
 			List<Integer> commentRatings = new ArrayList<>();
+			List<Property> commentProperties = new ArrayList<>();
 			for (Comment comment: comments) {
 				commentText.add(comment.getText());
 				commentRatings.add(comment.getRating());
+				commentProperties.add(comment.getProperty());			
 			}
 			// manually make json string
 			// {"name":"John","age":30,"email":"john@example.com"}
@@ -51,7 +53,9 @@ public class CommentController {
 				commentsJson += "[";
 			}
 			for (int i = 0; i < comments.size(); i++) {
-				commentsJson += "{\"text\":\"" + commentText.get(i) + "\",\"rating\":" + commentRatings.get(i) + "}";
+				commentsJson += "{\"text\":\"" + commentText.get(i) + "\",\"rating\":" + commentRatings.get(i)
+				+ ",\"propertyID\":" + commentProperties.get(i).getPropertyID()
+				+ ",\"address\":\"" + commentProperties.get(i).getAddress() + "\"}";
 				if ((i + 1) != comments.size()) { // not last thing
 					commentsJson += ",";
 				}
@@ -86,9 +90,11 @@ public class CommentController {
 			}
 			List<String> commentText = new ArrayList<>();
 			List<Integer> commentRatings = new ArrayList<>();
+			List<Property> commentProperties = new ArrayList<>();
 			for (Comment comment: comments) {
 				commentText.add(comment.getText());
 				commentRatings.add(comment.getRating());
+				commentProperties.add(comment.getProperty());
 			}
 			// manually make json string
 			String commentsJson = "";
@@ -96,7 +102,9 @@ public class CommentController {
 				commentsJson += "[";
 			}
 			for (int i = 0; i < comments.size(); i++) {
-				commentsJson += "{\"text\":\"" + commentText.get(i) + "\",\"rating\":" + commentRatings.get(i) + "}";
+				commentsJson += "{\"text\":\"" + commentText.get(i) + "\",\"rating\":" + commentRatings.get(i)
+				+ ",\"propertyID\":" + commentProperties.get(i).getPropertyID()
+				+ ",\"address\":\"" + commentProperties.get(i).getAddress() + "\"}";
 				if ((i + 1) != comments.size()) { // not last thing
 					commentsJson += ",";
 				}
