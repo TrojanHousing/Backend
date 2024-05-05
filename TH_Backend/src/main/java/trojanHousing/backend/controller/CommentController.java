@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -124,15 +125,15 @@ public class CommentController {
 	}
 	@CrossOrigin
 	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
-	public void addComment(@RequestParam("propertyID") int propertyID, @RequestParam("userID") int userID, 
-		@RequestParam("text") String text, @RequestParam("rating") int rating, HttpServletResponse response)
+	@ResponseBody
+	public ResponseEntity<?> addComment(@RequestParam("propertyID") int propertyID, @RequestParam("userID") int userID, 
+		@RequestParam("text") String text, @RequestParam("rating") int rating)
 		throws IOException {
 		try {
 			commentRepo.addComment(propertyID, userID, text, rating);
-			response.setStatus(HttpServletResponse.SC_OK);
+			return ResponseEntity.ok("Comment added");
 		} catch (Exception e) {
-			System.out.println("Error occured at CommentsController : " + e.getMessage());
-			response.setStatus(404);
+			return ResponseEntity.badRequest().body("Error adding comment");
 		}
 	}
 	
