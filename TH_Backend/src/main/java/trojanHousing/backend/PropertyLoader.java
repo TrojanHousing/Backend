@@ -43,6 +43,15 @@ public class PropertyLoader {
 			Type listType1 = new TypeToken<ArrayList<ListingReader>>(){}.getType();
 			Gson gson = new Gson();
 			listingReaders = gson.fromJson(temp1, listType1); 
+			sc2 = new Scanner(imageFile);
+			String temp2 = "";
+			while(sc2.hasNext()) {
+				temp2 += sc2.nextLine();
+			}
+			sc2.close();
+			Type listType2 = new TypeToken<ArrayList<List<String>>>(){}.getType();
+			urls = gson.fromJson(temp2, listType2); 
+			int j = 0;
 	        for (ListingReader lr : listingReaders) {
 	            Property property = new Property();
 	            property.setAddress(lr.getStreetAddress());
@@ -52,18 +61,11 @@ public class PropertyLoader {
 	            property.setDescription(lr.getDescription());
 	            property.setDistance(lr.getDistance());
 	            property.setPrice(lr.getPrice());
-	            property.setTopPicture(lr.getTopPicture());
+	            property.setTopPicture(urls.get(j).getFirst());
 	            addProperties(property);
+	            j++;
 	        }
 	        
-			sc2 = new Scanner(imageFile);
-			String temp2 = "";
-			while(sc2.hasNext()) {
-				temp2 += sc2.nextLine();
-			}
-			sc2.close();
-			Type listType2 = new TypeToken<ArrayList<List<String>>>(){}.getType();
-			urls = gson.fromJson(temp2, listType2); 
 			int i = 1;
 	        for (List<String> urlList : urls) {
 	            for (String url : urlList) {
