@@ -122,6 +122,7 @@ public class CommentController {
 			return ("Error :(");
 		}
 	}
+	@CrossOrigin
 	@RequestMapping(value = "/addComment", method = RequestMethod.POST)
 	public void addComment(@RequestParam("propertyID") int propertyID, @RequestParam("userID") int userID, 
 		@RequestParam("text") String text, @RequestParam("rating") int rating, HttpServletResponse response)
