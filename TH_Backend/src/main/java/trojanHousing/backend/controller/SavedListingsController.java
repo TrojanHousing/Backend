@@ -51,12 +51,27 @@ public class SavedListingsController {
 		
 	     if (userID > 0  && propertyID > 0) {
 	          savedListingsRepository.addToSavedListings(userID, propertyID);
-	          return ResponseEntity.ok("Listing successfully addded!"); // Redirect or return a success view
+	          return ResponseEntity.ok("Listing was successfully added!"); // Redirect or return a success view
 	     } 
 	     else {
 	          return ResponseEntity.badRequest().body("Error adding listing!"); // Redirect or return an error view
 	        
 	     }
+	}
+	@CrossOrigin
+	@RequestMapping(value = "/removeListing")
+	@ResponseBody
+	public ResponseEntity<?> removeListing(@RequestParam("userID") int userID, @RequestParam("propertyID") int propertyID) throws IOException
+	{
+		
+		if(userID > 0  && propertyID > 0) 
+		{
+			savedListingsRepository.removeListing(userID, propertyID);
+			return ResponseEntity.ok("Listing was sucessfully removed");
+		}
+		
+		
+		return ResponseEntity.badRequest().body("Error removing listing!");		
 	}
 	
 	@CrossOrigin
@@ -67,6 +82,10 @@ public class SavedListingsController {
         List<Property> savedListings = savedListingsRepository.getSavedListings(userID);
         return ResponseEntity.ok(savedListings); // The list will be automatically converted to JSON
     }
+	
+	
+	
+	
 	
 	
 	
