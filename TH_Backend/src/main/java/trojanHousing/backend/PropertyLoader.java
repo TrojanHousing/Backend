@@ -61,7 +61,10 @@ public class PropertyLoader {
 	            property.setDescription(lr.getDescription());
 	            property.setDistance(lr.getDistance());
 	            property.setPrice(lr.getPrice());
-	            property.setTopPicture(urls.get(j).getFirst());
+	            String pic = urls.get(j).getFirst();
+	            pic = pic.substring(0, pic.length()-5);
+	            pic += "f.jpg";
+	            property.setTopPicture(pic);
 	            addProperties(property);
 	            j++;
 	        }
