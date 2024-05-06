@@ -1,5 +1,5 @@
-Deployment Steps:
-Local Setup of Server in Eclipse:
+# Deployment Steps:
+### Local Setup of Server in Eclipse:
 Clone “TrojanHousing/Backend.git” and import project Backend into Eclipse workspace (Make sure that your project is using Java 21).
 Create a MySQL Schema named TrojanHousingDB or run create.sql script in the top of the project folder on a MySQL workspace setup at localhost 3306 with username root and password root.
 Run the main application located at src/main/java/trojanHousing/backend/TrojanHousingBackendApplication.java as a java application to start the Spring Boot server.
